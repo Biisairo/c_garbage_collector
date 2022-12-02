@@ -6,13 +6,12 @@
 /*   By: dongyoki <dongyoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:41:34 by dongyoki          #+#    #+#             */
-/*   Updated: 2022/12/02 15:55:46 by dongyoki         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:34:07 by dongyoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GARBAGE_COLLECTOR_H
 # define GARBAGE_COLLECTOR_H
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct s_mem

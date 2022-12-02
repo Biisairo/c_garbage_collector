@@ -6,7 +6,7 @@
 /*   By: dongyoki <dongyoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:41 by dongyoki          #+#    #+#             */
-/*   Updated: 2022/12/02 15:56:10 by dongyoki         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:04:07 by dongyoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	*primary(void *addr, size_t size)
 {
-	size_t			i;
 	void			*res;
 	static t_mem	**mem;
 

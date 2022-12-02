@@ -6,7 +6,7 @@
 /*   By: dongyoki <dongyoki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:41:34 by dongyoki          #+#    #+#             */
-/*   Updated: 2022/12/02 16:34:07 by dongyoki         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:41:27 by dongyoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_mem
 void				*ft_malloc(size_t size);
 void				ft_free(void *addr);
 void				ft_clear(void);
+void				*null_guard(void *addr);
 
 void				*primary(void *addr, size_t size);
 void				*gc_malloc(t_mem **mem, void *res);

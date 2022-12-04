@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_mem.c                                          :+:      :+:    :+:   */
+/*   mem_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyoki <dongyoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dongyoki <dongyoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:18:47 by dongyoki          #+#    #+#             */
-/*   Updated: 2022/12/02 16:32:09 by dongyoki         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:53:22 by dongyoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	mem_del(t_mem **mem, void *addr)
 		cur = cur->next;
 	}
 	if (!cur)
+	{
+		free(addr);
 		return ;
+	}
 	if (pre && cur)
 		pre->next = cur->next;
 	else if (!pre && cur)
@@ -65,4 +68,20 @@ void	mem_clear(t_mem **mem)
 		free(cur->addr);
 		free(cur);
 	}
+}
+
+void	*mem_find(t_mem **mem, void *addr)
+{
+	t_mem	*tmp;
+
+	tmp = *mem;
+	if (!tmp)
+		return (addr);
+	while (tmp)
+	{
+		if (tmp->addr == addr)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (addr);
 }

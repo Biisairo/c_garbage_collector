@@ -3,37 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   primary.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyoki <dongyoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dongyoki <dongyoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:41 by dongyoki          #+#    #+#             */
-/*   Updated: 2022/12/02 17:04:07 by dongyoki         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:53:17 by dongyoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "garbage_collector.h"
 
-void	*primary(void *addr, size_t size)
+void	*primary(void *addr, size_t size, char flag)
 {
 	void			*res;
 	static t_mem	**mem;
 
+	if (flag == 'c')
+		return (clear_mem(&mem));
 	if (!mem)
 		if (init_mems(&mem))
 			return (0);
-	if (addr == 0 && size == 0)
-		return (clear_mem(&mem));
-	else if (addr == 0)
+	if (flag == 'm' || flag == 's')
 	{
-		res = malloc(size);
+		if (flag == 'm')
+			res = malloc(size);
+		else
+			res = addr;
+		if (!res)
+			return (primary(0, 0, 'c'));
 		res = gc_malloc(&(mem[(unsigned long long)res % 100]), res);
 		if (!res)
-			return (primary(0, 0));
+			return (primary(0, 0, 'c'));
 		return (res);
 	}
-	else if (size == 0)
-	{
+	else if (flag == 'f')
 		gc_free(&(mem[(unsigned long long)addr % 100]), addr);
-	}
 	return (0);
 }
 
@@ -41,6 +44,8 @@ void	*gc_malloc(t_mem **mem, void *res)
 {
 	t_mem	*cur;
 
+	if (!mem_find(mem, res))
+		return (res);
 	if (!res)
 		return (0);
 	cur = new_mem(res);
@@ -78,6 +83,8 @@ void	*clear_mem(t_mem ***mem)
 {
 	size_t	i;
 
+	if (!(*mem))
+		return (0);
 	i = 0;
 	while (i < 100)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongyoki <dongyoki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dongyoki <dongyoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:41 by dongyoki          #+#    #+#             */
-/*   Updated: 2022/12/02 16:41:13 by dongyoki         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:37:18 by dongyoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 
 void	*ft_malloc(size_t size)
 {
-	return (primary(0, size));
+	return (primary(0, size, 'm'));
 }
 
 void	ft_free(void *addr)
 {
-	primary(addr, 0);
+	primary(addr, 0, 'f');
+}
+
+void	*ft_collect(void *addr)
+{
+	return (primary(addr, 0, 's'));
 }
 
 void	ft_clear(void)
 {
-	primary(0, 0);
+	primary(0, 0, 'c');
 }
 
 void	*null_guard(void *addr)
 {
 	if (!addr)
-		ft_clear();
+		primary(0, 0, 'c');
 	return (addr);
 }
